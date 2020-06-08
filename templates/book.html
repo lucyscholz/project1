@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+
+{% block body %}
+      <h4>{{ book.title }}</h4>
+      Author: {{ book.author }}
+      <br>Year: {{ book.year }}
+      <br>ISBN: {{ book.isbn }}
+      <br>
+      <br>Goodreads Average: {{ average }}
+      <br># of Goodreads Ratings: {{ number_ratings }}
+
+      {% if reviewed == False %}
+        <br><br>Leave a review for this book:
+        <form action="{{ url_for('book', isbn = book.isbn) }}" method="post">
+          <div class="form-group">
+            <input type="radio" id="5" name="rating" value=5>
+            <label for="isbn">&#9734; &#9734; &#9734; &#9734; &#9734;</label>
+            <br><input type="radio" id="4" name="rating" value=4>
+            <label for="isbn">&#9734; &#9734; &#9734; &#9734;</label>
+            <br><input type="radio" id="3" name="rating" value=3>
+            <label for="isbn">&#9734; &#9734; &#9734;</label>
+            <br><input type="radio" id="2" name="rating" value=2>
+            <label for="author">&#9734; &#9734;</label>
+            <br><input type="radio" id="1" name="rating" value=1>
+            <label for="title">&#9734;</label>
+          </div>
+          <div class="form-group">
+              <textarea class="form-control" name="text" id="text" placeholder="Enter Review Here.." style = "width: 300px" rows = "5"></textarea>
+              <br><button class="btn btn-primary">Submit Review</button>
+          </div>
+       </form>
+      {% endif %}
+      {% if reviewsExist %}
+      <div name = reviews>
+      <br>
+      Reviews of {{ book.title }}
+       <table>
+         <tr>
+           <th>Rating</th>
+           <th>Review</th>
+         </tr>
+       {% for review in reviews %}
+           <tr>
+             <td>{{ review.rating }}</td>
+             <td>{{ review.review }}</td>
+           </tr>
+       {% endfor %}
+       </table>
+       {% endif %}
+       {% if reviewsExist == False %}
+       <p>No reviews yet! Leave one above.</p>
+       {% endif %}
+       <p><a href = "{{ url_for('search') }}">Back to Search </a></p>
+      </div>
+
+
+
+{% endblock %}

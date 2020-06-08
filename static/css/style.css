@@ -1,0 +1,36 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 20px;
+  margin-bottom: 60px;
+  /* Margin bottom by footer height */
+}
+
+.navbar-brand {
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
+.paragraph {
+  margin: 30px;
+}
+
+table {
+  border: 2px;
+  border-collapse: collapse;
+}
+
+td, th {
+  text-align: center;
+  padding: 5px;
+  border: 1px solid grey;
+  width: 25%;
+}
+
+th {
+  background: grey;
+  color: white;
+}

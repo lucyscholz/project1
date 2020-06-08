@@ -6,10 +6,11 @@ CREATE TABLE books (
 );
 
 CREATE TABLE reviews (
-    isbn VARCHAR PRIMARY KEY,
-    rating INTEGER,
+    review_id SERIAL PRIMARY KEY
+    isbn VARCHAR NOT NULL,
+    rating INTEGER NOT NULL,
     review VARCHAR,
-    user_id INTEGER NOT NULL
+    user_id VARCHAR NOT NULL
 );
 
 CREATE TABLE users (

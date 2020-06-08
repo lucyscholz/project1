@@ -1,10 +1,43 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Success!
+    Search
 {% endblock %}
 
 {% block body %}
-    <h1>Hi, {{ first_name }}!</h1>
-    <p>You have successfully logged in.</p>
+    <form action="{{ url_for('search') }}" method="post">
+      <div class="form-group">
+          <input type="text" class="form-control" name="text" id="text" placeholder="Enter Search Terms Here.." style = "width: 300px">
+          <button class="btn btn-primary">Search</button>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="title" name="search" value="title">
+        <label for="title">Title</label>
+        <input type="radio" id="author" name="search" value="author">
+        <label for="author">Author</label>
+        <input type="radio" id="isbn" name="search" value="isbn">
+        <label for="isbn">ISBN</label>
+      </div>
+   </form>
+
+   {% if table %}
+   <div name = searchResults>
+     <table>
+       <tr>
+         <th>Title</th>
+         <th>Author</th>
+         <th>Year</th>
+         <th>ISBN</th>
+      </tr>
+    {% for result in results %}
+      <tr>
+        <td><a href="{{ url_for('book', isbn = result.isbn) }}">{{ result.title }}</a></td>
+        <td>{{ result.author }}</td>
+        <td>{{ result.year }}</td>
+        <td>{{ result.isbn }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+   </div>
+   {% endif %}
 {% endblock %}
